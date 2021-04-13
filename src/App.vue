@@ -27,7 +27,6 @@
       </ul>
     </div>
   </nav>
-
   <router-view />
 </template>
 
@@ -35,7 +34,6 @@
 #app {
   text-align: center;
 }
-
 #nav {
   padding: 30px;
 }
