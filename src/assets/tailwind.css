@@ -4,7 +4,12 @@
 
 @tailwind utilities;
 
-.topic {
-  @apply text-base text-fuchsia-500 tracking-wider font-semibold;
+
+.colorTextRed {
+  @apply  text-red-400 ;
+}
+
+.colorText {
+  @apply  bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500;
 }
 

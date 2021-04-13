@@ -8,11 +8,6 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  },
-  {
     path: '/cat',
     name: 'Cat',
     component: () => import('../views/Cat.vue')
@@ -21,6 +16,11 @@ const routes = [
     path: '/dog',
     name: 'Dog',
     component: () => import('../views/Dog.vue')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/Login.vue')
   },
 ]
 
