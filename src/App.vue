@@ -16,6 +16,7 @@
         <li>
           <a><router-link to="/Dog">Dog</router-link> |</a>
         </li>
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>

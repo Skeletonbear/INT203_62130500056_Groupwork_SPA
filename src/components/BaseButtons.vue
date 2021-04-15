@@ -1,16 +1,27 @@
 <template>
-<div>
-  <button type="submit" class="btn btn-default">{{ label }}</button>
-</div>
+  <div>
+    <button @click="buttonClick"   class="btn btn-default">
+       <slot>{{ label }} </slot>
+    </button>
+  </div>
 </template>
 
 <script>
- export default {
-     props: {
-         label: {
-             type: String,
-             required: true
-         }
-     }
- }
- </script>
+export default {
+  emits: ["btn-click"],
+  props: {
+    label: {
+      type: String,
+      required: true,
+    }
+  },
+  methods: {
+    buttonClick() {
+    const btnInfo= {label:this.label}
+      // มาแก้ข้อความที่หลัง
+      console.log(`${this.label} completed`);
+      this.$emit('btn-click', btnInfo)
+    },
+  },
+};
+</script>

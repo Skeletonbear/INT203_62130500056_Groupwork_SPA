@@ -1,9 +1,8 @@
 {
-  "surveyResults": [
+  "commentResults": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "comment": "Mew",
+      "id": 1
     }
   ]
 }

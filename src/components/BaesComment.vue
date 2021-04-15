@@ -1,37 +1,56 @@
 <template>
-  <!-- <div>
-    <div class="form-group">
-      <label for="comment">{{ comment }}</label>
-      <textarea class="form-control" rows="5" id="comment"></textarea>
-    </div>
-    <slot></slot>
-  </div> -->
+  <div class="form-group">
+    <form @submit.prevent="submitForm">
+        <label for="comment">{{ comment }}</label>
+        <input class="form-control"  id="comment"
+          :class="{ 'bg-red-50': invalidCommentInput }"
+          type="text"
+          v-model.trim="enteredComment"
+          @blur="validateComment">
 
-  <div>
-    <div class="form-group">
-      <label for="comment">{{ comment }}</label>
-      <textarea class="form-control" rows="5" id="comment"></textarea>
-    </div>
-    <slot></slot>
+        <p v-if="invalidCommentInput" class="text-red-500">
+          Please enter your Comment!
+        </p>
+        <base-buttons  label="submit" />
+    </form>
   </div>
 </template>
 
 <script>
-// export default {
-//   props: {
-//     comment: {
-//       type: String,
-//       required: false,
-//     },
-//   },
-// };
-
 export default {
   props: {
     comment: {
       type: String,
       required: false,
     },
+
+  },
+  emits: ["comment-submit"],
+  data() {
+    return {
+      url: "http://localhost:5050/commentResults",
+      commentResults: [],
+      enteredComment: "",
+      invalidCommentInput: false,
+    };
+  },
+  methods: {
+    submitForm() {
+      this.invalidCommentInput = this.enteredComment === "" ? true : false;
+      console.log(`Comment value: ${this.enteredComment}`);
+      console.log(`invalid Comment: ${this.invalidCommentInput}`);
+      this.saveComment();
+    },
+    saveComment() {
+      let commentResults = {
+        comment: this.enteredComment,
+      };
+      this.$emit("comment-submit", commentResults);
+    },
+    validateComment() {
+      this.invalidCommentInput = this.enteredComment === '' ? true : false
+      console.log(`name: ${this.invalidCommentInput}`)
+    }
   },
 };
 </script>

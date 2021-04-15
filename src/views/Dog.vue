@@ -3,7 +3,7 @@
     <div class="Dog">
       <!-- กลับไปทำ tailwind.css -->
       <h1
-        class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500"
+        class="topic"
       >
         Fruits and Vegetables that are Safe for Dogs
       </h1>
@@ -21,14 +21,14 @@
           vegetables. Some of the healthiest fruits and veggies for dogs include
         </div>
         <div>
-          <span class="text-green-700 font-bold my-2"> Apples : </span> These
+          <span class="textgreen "> Apples : </span> These
           are a great source of Vitamins A & C, and packed full of fiber to keep
           your dog’s digestive system working effectively. Just be sure to
           remove the core and seeds before feeding an apple to your pet.
         </div>
 
         <div>
-          <span class="text-green-700 font-bold my-2"> Bananas : </span> Rich in
+          <span class="textgreen"> Bananas : </span> Rich in
           potassium, vitamins, and copper, bananas are exceptionally sweet, and
           they’re also safe for your furbaby to eat. Due to their high sugar
           content, bananas should only be given occasionally and regarded firmly
@@ -36,86 +36,96 @@
         </div>
 
         <div>
-          <span class="text-green-700 font-bold my-2"> Blueberries : </span>
+          <span class="textgreen"> Blueberries : </span>
           Blueberries are full of antioxidants and fiber, which can help defend
           your pet from cancer.
         </div>
 
         <div>
-          <span class="text-green-700 font-bold my-2"> Broccoli: </span>
+          <span class="textgreen"> Broccoli: </span>
           This dark green vegetable is safe for your pet to eat, but only in
           very small quantities, as broccoli is fibrous and can lead to
           diarrhea.
         </div>
 
         <div>
-          <span class="text-green-700 font-bold my-2">Brussel sprouts : </span>
+          <span class="textgreen">Brussel sprouts : </span>
           Beware - the gassy effects of these vegetables are just as prevalent
           in dogs as they are in humans!
         </div>
 
         <div>
-          <span class="text-green-700 font-bold my-2"> Cantaloupe : </span>
+          <span class="textgreen"> Cantaloupe : </span>
           Feed this delicious melon sparingly, as it is high in natural sugar.
         </div>
 
         <div>
-          <span class="text-green-700 font-bold my-2"> Carrots : </span>
+          <span class="textgreen"> Carrots : </span>
           Carrots are high in vitamins and fiber, and their fibrous nature can
           brush away tartar, making them good for your dog’s teeth!
         </div>
 
         <div>
-          <span class="text-green-700 font-bold my-2"> Celery : </span>
+          <span class="textgreen"> Celery : </span>
           Similar to carrots, celery is another low-calorie vegetable that will
           naturally scrub your dog’s teeth.
         </div>
 
         <div>
-          <span class="text-green-700 font-bold my-2"> Cucumbers : </span>
+          <span class="textgreen"> Cucumbers : </span>
           Cucumbers are safe another safe low-calorie snack for dogs. However,
           don’t feed your pup too much, since it can cause an upset stomach.
         </div>
 
         <div>
-          <span class="text-green-700 font-bold my-2"> Green beans : </span>
+          <span class="textgreen"> Green beans : </span>
           Fresh green beans are chock full of iron and vitamins, making them a
           healthy option for your dog. Remember to only feed your pup fresh
           green beans, as canned ones usually have added salt.
         </div>
 
         <div>
-          <span class="text-green-700 font-bold my-2"> Mango : </span>
+          <span class="textgreen"> Mango : </span>
           Don’t forget to remove the stone before feeding as it contains a small
           amount of toxic cyanide, and could potentially cause your dog to
           choke. Like bananas, mangoes can be fed as a sweet treat.
         </div>
 
         <div>
-          <span> Oranges :</span>
+          <span class="textgreen"> Oranges :</span>
           These should be peeled, and all seeds removed before feeding to your
           canine pal to avoid choking hazards.
         </div>
 
         <div>
-          <span class=""> Peaches :</span>
+          <span class="textgreen"> Peaches :</span>
           Again, cut around the pit and remove it before offering it to your
           furbaby.
         </div>
         <div>
-          <span class=""> Pears :</span>
+          <span class="textgreen"> Pears :</span>
           Don’t forget to remove the pit and stones from pears too!
         </div>
         <div>
-          <span class=""> Potato :</span>
+          <span class="textgreen"> Potato :</span>
           Stick with boiled, plain varieties. If your dog is prone to an upset
           stomach, a good mealtime option is plain boiled chicken and potatoes
           with no added ingredients.
         </div>
 
         <div class="px-48">
-          <baes-comment comment="Comment"></baes-comment>
-          <base-buttons label="submit" />
+          <baes-comment
+            label="submit"
+            @comment-submit="addNewComment"
+            comment="Comment"
+          ></baes-comment>
+        </div>
+        <div v-for="result in commentResults" :key="result.id">
+          <div class="">
+            <p class="text-purple-600 italic flex ">{{ result.comment }}
+            <base-buttons class="ml-8" @click="deleteComment(result.id)" label="Delete">
+            </base-buttons></p>
+          </div>
         </div>
         
       </div>
@@ -123,3 +133,51 @@
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      url: "http://localhost:5050/commentResults",
+      commentResults: []
+    }
+  },
+  methods: {
+    async addNewComment(newComment) {
+      const res = await fetch(this.url, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          comment: newComment.comment
+        })
+      })
+      const data = await res.json()
+      this.commentResults = [...this.commentResults, data]
+      this.enteredComment = ""
+    },
+
+    async fetchCommentResult() {
+      const res = await fetch(this.url)
+      const data = await res.json()
+      return data;
+    },
+
+    async deleteComment(deleteId) {
+      try {
+        await fetch(`${this.url}/${deleteId}`, {
+          method: "DELETE",
+        });
+        this.commentResults = this.commentResults.filter(
+          (result) => result.id !== deleteId
+        );
+      } catch (error) {
+        console.log(`Could not delete! ${error}`);
+      }
+    },
+  },
+  async created() {
+    this.commentResults = await this.fetchCommentResult();
+  },
+};
+</script>
