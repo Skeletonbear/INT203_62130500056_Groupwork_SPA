@@ -1,14 +1,9 @@
 <template>
   <div class="mx-10">
     <div class="Dog">
-      <!-- กลับไปทำ tailwind.css -->
-      <h1
-        class="topic"
-      >
-        Fruits and Vegetables that are Safe for Dogs
-      </h1>
+      
+      <h1 class="topic"> Fruits and Vegetables that are Safe for Dogs </h1>
 
-      <!-- กลับไปทำ tailwind.css -->
       <div class="space-y-6 text-left">
         <div>
           Dogs are omnivores, meaning they can eat meat or plant-based food. In
@@ -120,7 +115,8 @@
             comment="Comment"
           ></baes-comment>
         </div>
-        <div v-for="result in commentResults" :key="result.id">
+        
+        <div v-for="result in commentResults" :key="result.id" class="Center">
           <div class="">
             <p class="text-purple-600 italic flex ">{{ result.comment }}
             <base-buttons class="ml-8" @click="deleteComment(result.id)" label="Delete">

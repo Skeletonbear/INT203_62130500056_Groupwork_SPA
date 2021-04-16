@@ -12,29 +12,59 @@
           treats. Here are some of the safest fruits and vegetables that you can
           share with your kitty.
         </div>
-        <div>
-          <span class="">Asparagus (steamed)</span>
-          <span class=""> Baked carrots</span>
-          <span class=""> Bananas</span>
+
+        <div class="flex space-x-60 flex justify-center">
+          <div >
+            <img src="../assets/cat/Asparagus-steamed.jpg" class="Radius" />
+            1. Asparagus (steamed)
+          </div>
+          <div>
+            <img src="../assets/cat/Baked-carrots.jpg" class="Radius"/>2. Baked carrots
+          </div>
+          <div>
+            <img src="../assets/cat/Bananas.jpg" class="Radius"/>3. Bananas
+          </div>
+          <div >
+            <img src="../assets/cat/Blueberries.jpg" class="Radius" />
+            4. Blueberries
+          </div>
+        </div>
+        
+        <div class="flex space-x-60 flex justify-center">
+          
+          <div>
+            <img src="../assets/cat/Carrots-steamed.png" class="Radius"/>5. Carrots
+            (steamed)
+          </div>
+          <div >
+            <img src="../assets/cat/Greenbeans-and-Broccoli.jpg" class="Radius" />
+            6. Broccoli (steamed)
+          </div>
+          <div>
+            <img src="../assets/cat/Melon.jpg" class="Radius"/>7. Melon
+          </div>
+          
         </div>
 
-        <div>
-          <span class=""> Blueberries</span>
-          <span class=""> Carrots (steamed)</span>
-          <span class=""> Cooked winter squash</span>
+        <div class="flex space-x-60 flex justify-center">
+          <div>
+            <img src="../assets/cat/Peas.jpg" class="Radius"/>8. Peas
+          </div>
+          <div >
+            <img src="../assets/cat/Pumpkin.jpg" class="Radius" />
+            9. Pumpkin
+          </div>
+          
         </div>
 
-        <div>
-          <span class=""> Green beans and/or Broccoli (steamed only)</span>
-          <span class=""> Melon</span>
-          <span class=""> Peas</span>
+        <div class="flex space-x-60 flex justify-center">
+          <div>
+            <img src="../assets/cat/Spinach.png" class="Radius"/>10. Spinach
+          </div>
         </div>
 
-        <div>
-          <span class=""> Pumpkin</span>
-          <span class="">Spinach</span>
-        </div>
-
+  
+        
         <div class="px-48">
           <baes-comment
             label="submit"
@@ -42,14 +72,20 @@
             comment="Comment"
           ></baes-comment>
         </div>
-        <div v-for="result in commentResults" :key="result.id">
+
+        <div v-for="result in commentResults" :key="result.id" class="Center">
           <div class="">
-            <p class="text-purple-600 italic flex ">{{ result.comment }}
-            <base-buttons class="ml-8" @click="deleteComment(result.id)" label="Delete">
-            </base-buttons></p>
+            <p class="text-purple-600 italic flex">
+              {{ result.comment }}
+              <base-buttons
+                class="ml-8"
+                @click="deleteComment(result.id)"
+                label="Delete"
+              >
+              </base-buttons>
+            </p>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -60,28 +96,28 @@ export default {
   data() {
     return {
       url: "http://localhost:5050/commentResults",
-      commentResults: []
-    }
+      commentResults: [],
+    };
   },
   methods: {
     async addNewComment(newComment) {
       const res = await fetch(this.url, {
         method: "POST",
         headers: {
-          "content-type": "application/json"
+          "content-type": "application/json",
         },
         body: JSON.stringify({
-          comment: newComment.comment
-        })
-      })
-      const data = await res.json()
-      this.commentResults = [...this.commentResults, data]
-      this.enteredComment = ""
+          comment: newComment.comment,
+        }),
+      });
+      const data = await res.json();
+      this.commentResults = [...this.commentResults, data];
+      this.enteredComment = "";
     },
 
     async fetchCommentResult() {
-      const res = await fetch(this.url)
-      const data = await res.json()
+      const res = await fetch(this.url);
+      const data = await res.json();
       return data;
     },
 

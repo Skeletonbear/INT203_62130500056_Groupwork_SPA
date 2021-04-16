@@ -1,6 +1,5 @@
 <template>
   <div class="hello">
-    <!-- กลับไปทำ tailwind.css -->
     <h1 class="topic">{{ msg }}</h1>
   </div>
 </template>

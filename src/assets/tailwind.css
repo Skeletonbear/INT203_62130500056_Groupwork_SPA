@@ -18,3 +18,27 @@
 .Picright {
     @apply h-36 w-44 float-left;
 }
+
+.Contentgroup{
+    @apply  group border-indigo-500 hover:bg-white hover:shadow-lg hover:border-transparent ;
+}
+
+.paragraph1{
+    @apply text-gray-900   ;
+} 
+
+.paragraph2{
+    @apply text-gray-500  ;
+} 
+
+.Center{
+    @apply flex justify-center px-96    ;
+} 
+
+.CalssSpace{
+    @apply space-y-6 text-center;
+}
+
+.Radius{
+    @apply   h-32 w-44   ;
+}
