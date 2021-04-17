@@ -39,7 +39,14 @@ export default {
       this.invalidCommentInput = this.enteredComment === "" ? true : false;
       console.log(`Comment value: ${this.enteredComment}`);
       console.log(`invalid Comment: ${this.invalidCommentInput}`);
-      this.saveComment();
+      if (this.enteredComment === '') {
+        this.addNewComment({
+          comment: this.enteredComment,
+        })
+      }else {
+        this.saveComment();
+        //this.closeModal();
+      }
     },
     saveComment() {
       let commentResults = {
