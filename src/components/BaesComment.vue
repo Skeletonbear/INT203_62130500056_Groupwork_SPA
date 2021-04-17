@@ -32,6 +32,8 @@ export default {
       commentResults: [],
       enteredComment: "",
       invalidCommentInput: false,
+      isEdit: false,
+      editId: '',
     };
   },
   methods: {
@@ -39,15 +41,60 @@ export default {
       this.invalidCommentInput = this.enteredComment === "" ? true : false;
       console.log(`Comment value: ${this.enteredComment}`);
       console.log(`invalid Comment: ${this.invalidCommentInput}`);
-      if (this.enteredComment === '') {
+
+       if (this.enteredComment === '') {
+      //   if (this.isEdit) {
+      //     this.editCheckComment({
+      //       id: this.editId,
+      //       comment: this.enteredComment
+           
+      //     })
+      //   } else {
+      //     this.addNewComment({
+      //     comment: this.enteredComment
+      //     })
+      //   }}
+
         this.addNewComment({
           comment: this.enteredComment,
         })
       }else {
         this.saveComment();
-        //this.closeModal();
-      }
-    },
+      }},
+    // this.enteredName = ''},
+    
+//     showData(oldComment) {
+//       this.isEdit = true
+//       this.editId = oldComment.id
+//       this.enteredComment = oldComment.comment
+//     },
+
+//  async editCheckComment(editingCheckComment) {
+//       try {
+//         const res = await fetch(`${this.url}/${editingCheckComment.id}`, {
+//           method: 'PUT',
+//           headers: {
+//             'content-type': 'application/json'
+//           },
+//           body: JSON.stringify({
+//             comment: editingCheckComment.comment,
+//           })
+//         })
+//         const data = await res.json()
+//         this.checkComment = this.checkComment.map((checkComment) =>
+//           checkComment.id === editingCheckComment.id
+//             ? { ...checkComment, comment: data.comment }
+//             : checkComment
+//         )
+//         this.isEdit = false
+//         this.editId = ''
+//         this.editingCheckComment = ''
+//       } catch (error) {
+//         console.log(`Could not edit! ${error}`)
+//       }
+//     },
+
+
     saveComment() {
       let commentResults = {
         comment: this.enteredComment,

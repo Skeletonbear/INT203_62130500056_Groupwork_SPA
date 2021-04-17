@@ -77,6 +77,13 @@
           <div class="">
             <p class="text-purple-600 italic flex">
               {{ result.comment }}
+
+              <base-buttons 
+              class="ml-8"
+              @click="showData(oldComment)" 
+              label="EDIT">
+              </base-buttons>
+
               <base-buttons
                 class="ml-8"
                 @click="deleteComment(result.id)"
@@ -92,9 +99,13 @@
 </template>
 
 <script>
+
 export default {
+
   data() {
     return {
+      // isEdit: false,
+      // editId: '',
       url: "http://localhost:5050/commentResults",
       commentResults: [],
     };
@@ -134,6 +145,39 @@ export default {
       }
     },
   },
+
+showData(oldComment) {
+      this.isEdit = true
+      this.editId = oldComment.id
+      this.enteredComment = oldComment.comment
+    },
+
+ async editCheckComment(editingCheckComment) {
+      try {
+        const res = await fetch(`${this.url}/${editingCheckComment.id}`, {
+          method: 'PUT',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            comment: editingCheckComment.comment,
+          })
+        })
+        const data = await res.json()
+        this.checkComment = this.checkComment.map((checkComment) =>
+          checkComment.id === editingCheckComment.id
+            ? { ...checkComment, comment: data.comment }
+            : checkComment
+        )
+        this.isEdit = false
+        this.editId = ''
+        this.editingCheckComment = ''
+      } catch (error) {
+        console.log(`Could not edit! ${error}`)
+      }
+    },
+
+
   async created() {
     this.commentResults = await this.fetchCommentResult();
   },

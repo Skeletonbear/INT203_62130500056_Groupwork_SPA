@@ -10,19 +10,19 @@
         <li class="active">
           <a> <router-link to="/">Home</router-link> |</a>
         </li>
-        <li>
+        <li class="active">
           <a><router-link to="/cat">Cat </router-link> |</a>
         </li>
-        <li>
+        <li class="active">
           <a><router-link to="/Dog">Dog</router-link> |</a>
         </li>
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
+        <li class="active">
           <a
             ><span class="glyphicon glyphicon-log-in text-red-400"></span
-            ><router-link to="/login"> Login </router-link></a
+            ><router-link to="/login"  > Login </router-link></a
           >
         </li>
       </ul>
