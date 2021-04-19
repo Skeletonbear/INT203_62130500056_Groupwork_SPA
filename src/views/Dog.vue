@@ -1,8 +1,7 @@
 <template>
   <div class="mx-10">
     <div class="Dog">
-      
-      <h1 class="topic"> Fruits and Vegetables that are Safe for Dogs </h1>
+      <h1 class="topic">Fruits and Vegetables that are Safe for Dogs</h1>
 
       <div class="space-y-6 text-left">
         <div>
@@ -16,18 +15,18 @@
           vegetables. Some of the healthiest fruits and veggies for dogs include
         </div>
         <div>
-          <span class="textgreen "> Apples : </span> These
-          are a great source of Vitamins A & C, and packed full of fiber to keep
-          your dog’s digestive system working effectively. Just be sure to
-          remove the core and seeds before feeding an apple to your pet.
+          <span class="textgreen"> Apples : </span> These are a great source of
+          Vitamins A & C, and packed full of fiber to keep your dog’s digestive
+          system working effectively. Just be sure to remove the core and seeds
+          before feeding an apple to your pet.
         </div>
 
         <div>
-          <span class="textgreen"> Bananas : </span> Rich in
-          potassium, vitamins, and copper, bananas are exceptionally sweet, and
-          they’re also safe for your furbaby to eat. Due to their high sugar
-          content, bananas should only be given occasionally and regarded firmly
-          as a treat.
+          <span class="textgreen"> Bananas : </span> Rich in potassium,
+          vitamins, and copper, bananas are exceptionally sweet, and they’re
+          also safe for your furbaby to eat. Due to their high sugar content,
+          bananas should only be given occasionally and regarded firmly as a
+          treat.
         </div>
 
         <div>
@@ -143,10 +142,12 @@
             </p>
           </div>
         </div>
-        
       </div>
     </div>
   </div>
+  <button type="button" class="btn btn-info">
+    <a><router-link to="/cat">Cat </router-link> |</a>
+  </button>
 </template>
 
 <script>

@@ -22,16 +22,6 @@ export default {
     comment: {
       type: String,
       required: false,
-    },
-    oldId: {
-      type: Number,
-      required: false,
-      default: null
-    },
-    oldComment: {
-      type: String,
-      required: false,
-      default: ''
     }
   },
   emits: ["comment-submit"],
