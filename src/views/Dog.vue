@@ -145,9 +145,6 @@
       </div>
     </div>
   </div>
-  <button type="button" class="btn btn-info">
-    <a><router-link to="/cat">Cat </router-link> |</a>
-  </button>
 </template>
 
 <script>

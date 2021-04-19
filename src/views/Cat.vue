@@ -69,16 +69,16 @@
             comment="Comment"
           ></baes-comment>
         </div>
-<div class="px-48">
-        <label >Edit</label>
-        <input 
-          class="input form-control "
-          id="url"
-          type="text"
-          v-model="inputlink"
-          placeholder="Type your message and press EDIT."
-        />
-      </div>
+        <div class="px-48">
+          <label>Edit</label>
+          <input
+            class="input form-control"
+            id="url"
+            type="text"
+            v-model="inputlink"
+            placeholder="Type your message and press EDIT."
+          />
+        </div>
         <div v-for="result in commentResults" :key="result.id" class="Center">
           <div class="">
             <p class="text-purple-600 italic flex">
@@ -97,7 +97,6 @@
             </p>
           </div>
         </div>
-        
       </div>
     </div>
   </div>
