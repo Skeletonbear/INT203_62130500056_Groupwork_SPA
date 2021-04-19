@@ -18,7 +18,6 @@ export default {
   methods: {
     buttonClick() {
     const btnInfo= {label:this.label}
-      // มาแก้ข้อความที่หลัง
       console.log(`${this.label} completed`);
       this.$emit('btn-click', btnInfo)
     },

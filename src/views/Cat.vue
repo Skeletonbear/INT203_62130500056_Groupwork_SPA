@@ -14,57 +14,54 @@
         </div>
 
         <div class="flex space-x-60 flex justify-center">
-          <div >
+          <div>
             <img src="../assets/cat/Asparagus-steamed.jpg" class="Radius" />
             1. Asparagus (steamed)
           </div>
           <div>
-            <img src="../assets/cat/Baked-carrots.jpg" class="Radius"/>2. Baked carrots
+            <img src="../assets/cat/Baked-carrots.jpg" class="Radius" />2. Baked
+            carrots
           </div>
           <div>
-            <img src="../assets/cat/Bananas.jpg" class="Radius"/>3. Bananas
+            <img src="../assets/cat/Bananas.jpg" class="Radius" />3. Bananas
           </div>
-          <div >
+          <div>
             <img src="../assets/cat/Blueberries.jpg" class="Radius" />
             4. Blueberries
           </div>
         </div>
-        
+
         <div class="flex space-x-60 flex justify-center">
-          
           <div>
-            <img src="../assets/cat/Carrots-steamed.png" class="Radius"/>5. Carrots
-            (steamed)
+            <img src="../assets/cat/Carrots-steamed.png" class="Radius" />5.
+            Carrots (steamed)
           </div>
-          <div >
-            <img src="../assets/cat/Greenbeans-and-Broccoli.jpg" class="Radius" />
+          <div>
+            <img
+              src="../assets/cat/Greenbeans-and-Broccoli.jpg"
+              class="Radius"
+            />
             6. Broccoli (steamed)
           </div>
           <div>
-            <img src="../assets/cat/Melon.jpg" class="Radius"/>7. Melon
+            <img src="../assets/cat/Melon.jpg" class="Radius" />7. Melon
           </div>
-          
         </div>
 
         <div class="flex space-x-60 flex justify-center">
+          <div><img src="../assets/cat/Peas.jpg" class="Radius" />8. Peas</div>
           <div>
-            <img src="../assets/cat/Peas.jpg" class="Radius"/>8. Peas
-          </div>
-          <div >
             <img src="../assets/cat/Pumpkin.jpg" class="Radius" />
             9. Pumpkin
           </div>
-          
         </div>
 
         <div class="flex space-x-60 flex justify-center">
           <div>
-            <img src="../assets/cat/Spinach.png" class="Radius"/>10. Spinach
+            <img src="../assets/cat/Spinach.png" class="Radius" />10. Spinach
           </div>
         </div>
 
-  
-        
         <div class="px-48">
           <baes-comment
             label="submit"
@@ -72,16 +69,23 @@
             comment="Comment"
           ></baes-comment>
         </div>
-
+<div class="px-48">
+        <label >Edit</label>
+        <input 
+          class="input form-control "
+          id="url"
+          type="text"
+          v-model="inputlink"
+          placeholder="Type your message and press EDIT."
+        />
+      </div>
         <div v-for="result in commentResults" :key="result.id" class="Center">
           <div class="">
             <p class="text-purple-600 italic flex">
               {{ result.comment }}
 
-              <base-buttons 
-              class="ml-8"
-              @click="showData(oldComment)" 
-              label="EDIT">
+              <base-buttons class="ml-8" @click="editCheckComment(result.id)">
+                EDIT
               </base-buttons>
 
               <base-buttons
@@ -93,21 +97,21 @@
             </p>
           </div>
         </div>
+        
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
-
   data() {
     return {
       // isEdit: false,
       // editId: '',
       url: "http://localhost:5050/commentResults",
       commentResults: [],
+      inputlink: "",
     };
   },
   methods: {
@@ -144,47 +148,35 @@ export default {
         console.log(`Could not delete! ${error}`);
       }
     },
-  },
-
-showData(oldComment) {
-      this.isEdit = true
-      this.editId = oldComment.id
-      this.enteredComment = oldComment.comment
-    },
-
- async editCheckComment(editingCheckComment) {
+    async editCheckComment(editingCheckComment) {
       try {
-        const res = await fetch(`${this.url}/${editingCheckComment.id}`, {
-          method: 'PUT',
+        const res = await fetch(`${this.url}/${editingCheckComment}`, {
+          method: "PUT",
           headers: {
-            'content-type': 'application/json'
+            "content-type": "application/json",
           },
           body: JSON.stringify({
-            comment: editingCheckComment.comment,
-          })
-        })
-        const data = await res.json()
-        this.checkComment = this.checkComment.map((checkComment) =>
-          checkComment.id === editingCheckComment.id
+            comment: this.inputlink,
+          }),
+        });
+        const data = await res.json();
+
+        this.commentResults = this.commentResults.map((checkComment) =>
+          checkComment.id === editingCheckComment
             ? { ...checkComment, comment: data.comment }
             : checkComment
-        )
-        this.isEdit = false
-        this.editId = ''
-        this.editingCheckComment = ''
+        );
+        this.isEdit = false;
+        this.editId = "";
+        this.editingCheckComment = "";
       } catch (error) {
-        console.log(`Could not edit! ${error}`)
+        console.log(`Could not edit! ${error}`);
       }
     },
-
+  },
 
   async created() {
     this.commentResults = await this.fetchCommentResult();
   },
 };
 </script>
-
-
-
-
-

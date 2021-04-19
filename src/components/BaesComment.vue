@@ -23,17 +23,25 @@ export default {
       type: String,
       required: false,
     },
-
+    oldId: {
+      type: Number,
+      required: false,
+      default: null
+    },
+    oldComment: {
+      type: String,
+      required: false,
+      default: ''
+    }
   },
   emits: ["comment-submit"],
   data() {
     return {
       url: "http://localhost:5050/commentResults",
       commentResults: [],
-      enteredComment: "",
+      enteredComment: this.oldComment,
       invalidCommentInput: false,
-      isEdit: false,
-      editId: '',
+      id: this.oldId,
     };
   },
   methods: {
@@ -43,17 +51,6 @@ export default {
       console.log(`invalid Comment: ${this.invalidCommentInput}`);
 
        if (this.enteredComment === '') {
-      //   if (this.isEdit) {
-      //     this.editCheckComment({
-      //       id: this.editId,
-      //       comment: this.enteredComment
-           
-      //     })
-      //   } else {
-      //     this.addNewComment({
-      //     comment: this.enteredComment
-      //     })
-      //   }}
 
         this.addNewComment({
           comment: this.enteredComment,
@@ -61,40 +58,7 @@ export default {
       }else {
         this.saveComment();
       }},
-    // this.enteredName = ''},
     
-//     showData(oldComment) {
-//       this.isEdit = true
-//       this.editId = oldComment.id
-//       this.enteredComment = oldComment.comment
-//     },
-
-//  async editCheckComment(editingCheckComment) {
-//       try {
-//         const res = await fetch(`${this.url}/${editingCheckComment.id}`, {
-//           method: 'PUT',
-//           headers: {
-//             'content-type': 'application/json'
-//           },
-//           body: JSON.stringify({
-//             comment: editingCheckComment.comment,
-//           })
-//         })
-//         const data = await res.json()
-//         this.checkComment = this.checkComment.map((checkComment) =>
-//           checkComment.id === editingCheckComment.id
-//             ? { ...checkComment, comment: data.comment }
-//             : checkComment
-//         )
-//         this.isEdit = false
-//         this.editId = ''
-//         this.editingCheckComment = ''
-//       } catch (error) {
-//         console.log(`Could not edit! ${error}`)
-//       }
-//     },
-
-
     saveComment() {
       let commentResults = {
         comment: this.enteredComment,
